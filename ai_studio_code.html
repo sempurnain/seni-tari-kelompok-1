@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Belajar Seni Tari</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    
+    .card-dance {
+      background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+    }
+    
+    .nav-item {
+      transition: all 0.3s ease;
+    }
+    
+    .nav-item:hover, .nav-item.active {
+      background: rgba(233, 69, 96, 0.2);
+      border-color: #e94560;
+    }
+    
+    .dance-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+    
+    .dance-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    
+    .quiz-option {
+      transition: all 0.3s ease;
+    }
+    
+    .quiz-option:hover:not(.selected):not(.correct):not(.wrong) {
+      background: rgba(233, 69, 96, 0.2);
+      border-color: #e94560;
+    }
+    
+    .quiz-option.selected {
+      background: rgba(233, 69, 96, 0.3);
+      border-color: #e94560;
+    }
+    
+    .quiz-option.correct {
+      background: rgba(16, 185, 129, 0.3);
+      border-color: #10b981;
+    }
+    
+    .quiz-option.wrong {
+      background: rgba(239, 68, 68, 0.3);
+      border-color: #ef4444;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(233, 69, 96, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(233, 69, 96, 0.6); }
+    }
+    
+    .slide-in {
+      animation: slideIn 0.5s ease-out forwards;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .progress-bar {
+      transition: width 0.5s ease;
+    }
+
+    .matching-item {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .matching-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .matching-item.selected {
+      border-color: #e94560;
+      box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+    }
+    
+    .matching-item.matched {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.2);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full gradient-bg text-white overflow-auto">
+  <div id="app" class="min-h-full flex flex-col">
+   <!-- Navigation -->
+   <nav class="sticky top-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+       <span class="text-3xl">💃</span> <span id="nav-title" class="font-display text-xl font-semibold text-white">Seni Tari Indonesia</span>
+      </div>
+      <div class="flex gap-2">
+       <button onclick="showSection('home')" class="nav-item px-4 py-2 rounded-full border border-white/20 text-sm font-medium" data-section="home">Beranda</button> <button onclick="showSection('learn')" class="nav-item px-4 py-2 rounded-full border border-white/20 text-sm font-medium" data-section="learn">Belajar</button> <button onclick="showSection('examples')" class="nav-item px-4 py-2 rounded-full border border-white/20 text-sm font-medium" data-section="examples">Contoh</button> <button onclick="showSection('game')" class="nav-item px-4 py-2 rounded-full border border-white/20 text-sm font-medium" data-section="game">Game</button>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Main Content -->
+   <main class="flex-1">
+    <!-- Home Section -->
+    <section id="home-section" class="min-h-full py-12 px-4">
+     <div class="max-w-4xl mx-auto text-center">
+      <div class="floating mb-8">
+       <span class="text-8xl">🎭</span>
+      </div>
+      <h1 id="main-title" class="font-display text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-pink-200 to-white bg-clip-text text-transparent">Mengenal Seni Tari Indonesia</h1>
+      <p id="welcome-text" class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">Selamat datang di media pembelajaran interaktif seni tari! Mari jelajahi keindahan dan keragaman tarian tradisional Indonesia.</p>
+      <div class="flex flex-wrap justify-center gap-4 mb-16">
+       <button onclick="showSection('learn')" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold pulse-glow"> 🎓 Mulai Belajar </button> <button onclick="showSection('game')" class="px-8 py-4 rounded-full text-lg font-semibold border-2 border-white/30 hover:bg-white/10 transition-all"> 🎮 Main Game </button>
+      </div><!-- Feature Cards -->
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+       <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.1s">
+        <span class="text-4xl mb-4 block">📚</span>
+        <h3 class="text-lg font-semibold mb-2">Materi Lengkap</h3>
+        <p class="text-gray-400 text-sm">Pelajari pengertian, jenis, dan unsur-unsur seni tari</p>
+       </div>
+       <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.2s">
+        <span class="text-4xl mb-4 block">🗺️</span>
+        <h3 class="text-lg font-semibold mb-2">Tarian Nusantara</h3>
+        <p class="text-gray-400 text-sm">Kenali berbagai tarian tradisional dari seluruh Indonesia</p>
+       </div>
+       <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.3s">
+        <span class="text-4xl mb-4 block">🏆</span>
+        <h3 class="text-lg font-semibold mb-2">Game Edukatif</h3>
+        <p class="text-gray-400 text-sm">Uji pengetahuanmu dengan kuis dan game menarik</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Learn Section -->
+    <section id="learn-section" class="hidden min-h-full py-12 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-4xl font-bold text-center mb-12">📖 Materi Pembelajaran</h2><!-- Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+       <button onclick="showLearnTab('pengertian')" class="learn-tab px-6 py-3 rounded-full border border-white/20 font-medium transition-all" data-tab="pengertian">Pengertian</button> <button onclick="showLearnTab('jenis')" class="learn-tab px-6 py-3 rounded-full border border-white/20 font-medium transition-all" data-tab="jenis">Jenis Tari</button> <button onclick="showLearnTab('unsur')" class="learn-tab px-6 py-3 rounded-full border border-white/20 font-medium transition-all" data-tab="unsur">Unsur Tari</button> <button onclick="showLearnTab('fungsi')" class="learn-tab px-6 py-3 rounded-full border border-white/20 font-medium transition-all" data-tab="fungsi">Fungsi Tari</button>
+      </div><!-- Learn Content -->
+      <div id="learn-content" class="card-dance rounded-3xl p-8">
+       <!-- Content will be injected here -->
+      </div>
+     </div>
+    </section><!-- Examples Section -->
+    <section id="examples-section" class="hidden min-h-full py-12 px-4">
+     <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-4xl font-bold text-center mb-4">🌺 Contoh Tarian Nusantara</h2>
+      <p class="text-center text-gray-400 mb-12">Klik kartu untuk mempelajari lebih lanjut</p>
+      <div id="dance-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+       <!-- Dance cards will be injected here -->
+      </div>
+     </div><!-- Dance Detail Modal -->
+     <div id="dance-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div class="card-dance rounded-3xl p-8 max-w-3xl w-full max-h-[90%] overflow-auto">
+       <div class="flex justify-between items-start mb-6">
+        <div id="modal-image-container" class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-pink-500">
+            <img id="modal-image" src="" class="w-full h-full object-cover" alt="Dance Image">
+        </div>
+        <button onclick="closeDanceModal()" class="text-2xl hover:text-pink-400 transition-colors">✕</button>
+       </div>
+       <h3 id="modal-title" class="font-display text-3xl font-bold mb-2"></h3>
+       <p id="modal-origin" class="text-pink-400 mb-4"></p><!-- YouTube Link Button -->
+       <div class="mb-6"><a id="modal-youtube-link" href="" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block px-6 py-3 rounded-xl text-white font-semibold hover:shadow-lg transition-all"> ▶️ Tonton di YouTube </a>
+       </div>
+       <p id="modal-description" class="text-gray-300 leading-relaxed mb-6"></p>
+       <div class="bg-white/5 rounded-xl p-4">
+        <h4 class="font-semibold mb-2">📌 Fakta Menarik:</h4>
+        <p id="modal-facts" class="text-gray-400 text-sm"></p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Game Section -->
+    <section id="game-section" class="hidden min-h-full py-12 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-4xl font-bold text-center mb-12">🎮 Game Edukatif</h2><!-- Game Selection -->
+      <div id="game-select" class="grid md:grid-cols-2 gap-6">
+       <div onclick="startQuiz()" class="dance-card card-dance rounded-3xl p-8 cursor-pointer text-center">
+        <span class="text-6xl mb-4 block">❓</span>
+        <h3 class="text-2xl font-bold mb-2">Kuis Tari</h3>
+        <p class="text-gray-400">Uji pengetahuanmu tentang seni tari dengan 10 pertanyaan seru!</p>
+        <div class="mt-4 btn-primary inline-block px-6 py-2 rounded-full text-sm font-medium">
+         Mulai Kuis
+        </div>
+       </div>
+       <div onclick="startMatching()" class="dance-card card-dance rounded-3xl p-8 cursor-pointer text-center">
+        <span class="text-6xl mb-4 block">🔗</span>
+        <h3 class="text-2xl font-bold mb-2">Cocokkan Tarian</h3>
+        <p class="text-gray-400">Cocokkan nama tarian dengan daerah asalnya!</p>
+        <div class="mt-4 btn-primary inline-block px-6 py-2 rounded-full text-sm font-medium">
+         Mulai Game
+        </div>
+       </div>
+      </div><!-- Quiz Game -->
+      <div id="quiz-game" class="hidden">
+       <div class="card-dance rounded-3xl p-8">
+        <!-- Progress -->
+        <div class="mb-6">
+         <div class="flex justify-between text-sm mb-2">
+          <span>Pertanyaan <span id="quiz-current">1</span>/10</span> <span>Skor: <span id="quiz-score">0</span></span>
+         </div>
+         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+          <div id="quiz-progress" class="progress-bar h-full bg-gradient-to-r from-pink-500 to-red-500" style="width: 10%"></div>
+         </div>
+        </div><!-- Question -->
+        <h3 id="quiz-question" class="text-xl font-semibold mb-6"></h3><!-- Options -->
+        <div id="quiz-options" class="space-y-3">
+         <!-- Options will be injected here -->
+        </div><!-- Navigation -->
+        <div class="mt-8 flex justify-between">
+         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> ← Kembali </button> <button id="quiz-next" onclick="nextQuestion()" class="hidden btn-primary px-6 py-2 rounded-full font-medium"> Lanjut → </button>
+        </div>
+       </div>
+      </div><!-- Matching Game -->
+      <div id="matching-game" class="hidden">
+       <div class="card-dance rounded-3xl p-8">
+        <div class="flex justify-between items-center mb-6">
+         <h3 class="text-xl font-semibold">Cocokkan Tarian dengan Daerahnya!</h3><span class="text-pink-400">Skor: <span id="match-score">0</span>/10</span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+         <!-- Dances Column -->
+         <div>
+          <h4 class="text-center text-gray-400 mb-4">Nama Tarian</h4>
+          <div id="match-dances" class="space-y-3">
+           <!-- Dance items -->
+          </div>
+         </div><!-- Regions Column -->
+         <div>
+          <h4 class="text-center text-gray-400 mb-4">Daerah Asal</h4>
+          <div id="match-regions" class="space-y-3">
+           <!-- Region items -->
+          </div>
+         </div>
+        </div>
+        <div class="mt-8 flex justify-between">
+         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> ← Kembali </button> <button onclick="resetMatching()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> 🔄 Ulangi </button>
+        </div>
+       </div>
+      </div><!-- Game Result -->
+      <div id="game-result" class="hidden">
+       <div class="card-dance rounded-3xl p-8 text-center">
+        <span id="result-emoji" class="text-8xl mb-4 block"></span>
+        <h3 id="result-title" class="font-display text-3xl font-bold mb-2"></h3>
+        <p id="result-message" class="text-gray-300 mb-4"></p>
+        <p class="text-2xl font-bold text-pink-400 mb-8">Skor: <span id="final-score"></span></p>
+        <div class="flex justify-center gap-4">
+         <button onclick="backToGameSelect()" class="px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all"> Pilih Game Lain </button> <button id="retry-btn" class="btn-primary px-6 py-3 rounded-full font-medium"> Main Lagi </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-black/30 border-t border-white/10 py-6 px-4 text-center text-gray-400 text-sm">
+    <p>🎭 Media Pembelajaran Seni Tari Indonesia | Dibuat untuk Pendidikan</p>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Mengenal Seni Tari Indonesia',
+      welcome_text: 'Selamat datang di media pembelajaran interaktif seni tari! Mari jelajahi keindahan dan keragaman tarian tradisional Indonesia.',
+      primary_color: '#e94560',
+      secondary_color: '#1a1a2e',
+      text_color: '#ffffff',
+      accent_color: '#ff6b6b',
+      surface_color: '#16213e'
+    };
+
+    // Learning content data
+    const learnContent = {
+      pengertian: {
+        title: '🎭 Pengertian Seni Tari',
+        content: `
+          <p class="mb-4">Seni tari adalah ungkapan ekspresi jiwa manusia yang diwujudkan melalui gerak-gerak tubuh yang indah dan ritmis. Tari merupakan salah satu cabang seni yang menggunakan tubuh sebagai media utama untuk menyampaikan pesan, cerita, atau emosi.</p>
+          <div class="bg-white/5 rounded-xl p-4 mb-4">
+            <h4 class="font-semibold text-pink-400 mb-2">Menurut Para Ahli:</h4>
+            <ul class="space-y-2 text-gray-300">
+              <li>• <strong>Soedarsono:</strong> Tari adalah ekspresi jiwa manusia yang diungkapkan dengan gerak-gerak ritmis yang indah.</li>
+              <li>• <strong>Corrie Hartong:</strong> Tari adalah gerak-gerak yang diberi bentuk dan ritmis dari badan di dalam ruang.</li>
+              <li>• <strong>Curt Sachs:</strong> Tari adalah gerak yang ritmis.</li>
+            </ul>
+          </div>
+          <p class="text-gray-300">Di Indonesia, seni tari memiliki nilai yang sangat penting sebagai warisan budaya leluhur yang harus dilestarikan dan dikembangkan.</p>
+        `
+      },
+      jenis: {
+        title: '📂 Jenis-Jenis Tari',
+        content: `
+          <div class="space-y-4">
+            <div class="bg-white/5 rounded-xl p-4">
+              <h4 class="font-semibold text-pink-400 mb-2">🎪 Berdasarkan Pola Garapan:</h4>
+              <ul class="space-y-1 text-gray-300">
+                <li>• <strong>Tari Tradisional:</strong> Tari yang diwariskan turun-temurun (Tari Pendet, Tari Saman)</li>
+                <li>• <strong>Tari Kreasi Baru:</strong> Tari yang dikembangkan dengan sentuhan modern</li>
+                <li>• <strong>Tari Kontemporer:</strong> Tari yang mengutamakan kebebasan ekspresi</li>
+              </ul>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <h4 class="font-semibold text-pink-400 mb-2">👥 Berdasarkan Jumlah Penari:</h4>
+              <ul class="space-y-1 text-gray-300">
+                <li>• <strong>Tari Tunggal:</strong> Dibawakan oleh satu orang (Tari Golek)</li>
+                <li>• <strong>Tari Berpasangan:</strong> Dibawakan oleh dua orang (Tari Serampang Dua Belas)</li>
+                <li>• <strong>Tari Kelompok:</strong> Dibawakan oleh banyak orang (Tari Saman, Tari Kecak)</li>
+              </ul>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <h4 class="font-semibold text-pink-400 mb-2">🎭 Berdasarkan Fungsi:</h4>
+              <ul class="space-y-1 text-gray-300">
+                <li>• <strong>Tari Upacara:</strong> Untuk ritual keagamaan/adat</li>
+                <li>• <strong>Tari Hiburan:</strong> Untuk menghibur penonton</li>
+                <li>• <strong>Tari Pertunjukan:</strong> Untuk dipertontonkan di panggung</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      unsur: {
+        title: '🧩 Unsur-Unsur Tari',
+        content: `
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">🏃</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Gerak (Wiraga)</h4>
+              <p class="text-gray-300 text-sm">Unsur utama tari yang meliputi seluruh gerakan tubuh penari</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">🎵</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Irama (Wirama)</h4>
+              <p class="text-gray-300 text-sm">Musik pengiring yang menentukan tempo dan ritme tarian</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">😊</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Ekspresi (Wirasa)</h4>
+              <p class="text-gray-300 text-sm">Penjiwaan dan ekspresi wajah penari saat menari</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">👗</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Busana</h4>
+              <p class="text-gray-300 text-sm">Kostum dan aksesoris yang dikenakan penari</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">💄</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Rias</h4>
+              <p class="text-gray-300 text-sm">Riasan wajah untuk memperkuat karakter</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4">
+              <span class="text-3xl">🎪</span>
+              <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Panggung</h4>
+              <p class="text-gray-300 text-sm">Pengaturan tempat pertunjukan tari</p>
+            </div>
+          </div>
+        `
+      },
+      fungsi: {
+        title: '🎯 Fungsi Seni Tari',
+        content: `
+          <div class="space-y-4">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+              <span class="text-3xl">🙏</span>
+              <div>
+                <h4 class="font-semibold text-pink-400 mb-1">Sarana Upacara</h4>
+                <p class="text-gray-300 text-sm">Digunakan dalam ritual keagamaan dan adat istiadat, seperti Tari Pendet di Bali untuk menyambut tamu atau persembahan kepada dewa.</p>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+              <span class="text-3xl">🎉</span>
+              <div>
+                <h4 class="font-semibold text-pink-400 mb-1">Sarana Hiburan</h4>
+                <p class="text-gray-300 text-sm">Memberikan hiburan dan kesenangan bagi penonton maupun penari, seperti Tari Jaipong yang menghibur.</p>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+              <span class="text-3xl">🎭</span>
+              <div>
+                <h4 class="font-semibold text-pink-400 mb-1">Sarana Pertunjukan</h4>
+                <p class="text-gray-300 text-sm">Ditampilkan sebagai karya seni yang memiliki nilai estetika tinggi di panggung profesional.</p>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+              <span class="text-3xl">📚</span>
+              <div>
+                <h4 class="font-semibold text-pink-400 mb-1">Media Pendidikan</h4>
+                <p class="text-gray-300 text-sm">Mengajarkan nilai-nilai budaya, sejarah, dan moral kepada generasi muda.</p>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+              <span class="text-3xl">💬</span>
+              <div>
+                <h4 class="font-semibold text-pink-400 mb-1">Media Komunikasi</h4>
+                <p class="text-gray-300 text-sm">Menyampaikan pesan, cerita, atau kritik sosial melalui gerakan simbolis.</p>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    // Dance examples data with image links
+    const dances = [
+      {
+        name: 'Tari Saman',
+        origin: 'Aceh',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775456992/images_tjsysh.jpg',
+        youtubeUrl: 'https://youtu.be/q-8tMZKBgrA',
+        description: 'Tari Saman adalah tarian tradisional Aceh yang ditampilkan secara berkelompok dengan gerakan cepat dan kompak. Penari duduk berbaris dan melakukan gerakan tepuk tangan, dada, dan paha secara serentak.',
+        facts: 'Tari Saman telah diakui UNESCO sebagai Warisan Budaya Tak Benda pada tahun 2011. Tarian ini biasanya dibawakan oleh penari berjumlah ganjil.'
+      },
+      {
+        name: 'Tari Pendet',
+        origin: 'Bali',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458112/tari_pendet_rdlncm.jpg',
+        youtubeUrl: 'https://youtu.be/VXCjERRRRy0',
+        description: 'Tari Pendet adalah tarian selamat datang khas Bali yang ditarikan oleh sekelompok wanita. Penari membawa bokor berisi bunga yang ditaburkan sebagai ucapan selamat datang.',
+        facts: 'Awalnya Tari Pendet adalah tarian pemujaan di pura-pura. Kini berkembang menjadi tarian penyambutan tamu dan pertunjukan.'
+      },
+      {
+        name: 'Tari Kecak',
+        origin: 'Bali',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458104/tari_kecak_bqbn97.jpg',
+        youtubeUrl: 'https://youtu.be/gjd78XHZazY?si=hpzgsYYmY4tgMmIe',
+        description: 'Tari Kecak adalah pertunjukan tari yang unik tanpa iringan gamelan. Musik dihasilkan dari suara "cak cak cak" yang diucapkan serempak oleh puluhan penari pria.',
+        facts: 'Tari Kecak diciptakan pada tahun 1930-an dan mengisahkan cerita Ramayana. Biasanya ditampilkan saat matahari terbenam.'
+      },
+      {
+        name: 'Tari Jaipong',
+        origin: 'Jawa Barat',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458099/tari_jaipong_csim0z.jpg',
+        youtubeUrl: 'https://youtu.be/qgNmtnMx1ck?si=TC-mu1Q6bER5j39d',
+        description: 'Tari Jaipong adalah tarian kreasi dari Jawa Barat yang menggabungkan unsur pencak silat, wayang golek, dan ketuk tilu. Gerakannya dinamis dan penuh energi.',
+        facts: 'Tari Jaipong diciptakan oleh seniman Gugum Gumbira pada tahun 1970-an dan menjadi ikon kesenian Sunda.'
+      },
+      {
+        name: 'Tari Tor-Tor',
+        origin: 'Sumatera Utara',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458092/tari_tor_tor_ztflo3.jpg',
+        youtubeUrl: 'https://youtu.be/eOqAaWMwHS8?si=cINFUq2Ns6LS0xRZ',
+        description: 'Tari Tor-Tor adalah tarian tradisional suku Batak yang diiringi musik gondang. Gerakan tari ini mengalir lembut mengikuti irama musik.',
+        facts: 'Tari Tor-Tor erat kaitannya dengan upacara adat Batak seperti pernikahan, pemakaman, dan penyambutan tamu penting.'
+      },
+      {
+        name: 'Tari Piring',
+        origin: 'Sumatera Barat',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458085/tari_piring_kb1wku.jpg',
+        youtubeUrl: 'https://youtu.be/99xgYhQNaOc?si=w6qLtVn2JtryYR8J',
+        description: 'Tari Piring adalah tarian tradisional Minangkabau yang menggunakan piring sebagai properti. Penari bergerak lincah sambil memegang piring di telapak tangan.',
+        facts: 'Di akhir pertunjukan, piring-piring dilempar dan dipecahkan, lalu penari menari di atas pecahan piring tanpa terluka.'
+      },
+      {
+        name: 'Tari Reog Ponorogo',
+        origin: 'Jawa Timur',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458079/tari_reog_ponorogo_vhfucb.jpg',
+        youtubeUrl: 'https://youtu.be/ME1i_9uSzZQ?si=SF92L8tpWQk2k0qL',
+        description: 'Tari Reog adalah kesenian spektakuler dari Ponorogo yang menampilkan topeng besar berbentuk kepala singa dengan hiasan bulu merak yang berat.',
+        facts: 'Topeng reog bisa berbobot hingga 50 kg dan ditopang menggunakan gigi penari! Reog sudah dipatenkan sebagai warisan budaya Indonesia.'
+      },
+      {
+        name: 'Tari Serimpi',
+        origin: 'Yogyakarta',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458071/tari_serimpi_nuxpfn.jpg',
+        youtubeUrl: 'https://youtu.be/wZ4KD4A5WiQ?si=qI2X-0mspX9xONnE',
+        description: 'Tari Serimpi adalah tarian klasik keraton yang ditarikan oleh empat penari wanita. Gerakannya sangat halus, anggun, dan penuh makna filosofis.',
+        facts: 'Tari Serimpi melambangkan empat unsur: tanah, air, api, dan udara. Dulu hanya boleh ditarikan di dalam keraton.'
+      },
+      {
+        name: 'Tari Gantar',
+        origin: 'Kalimantan Timur',
+        imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458063/tari_gantar_j1pcbu.jpg',
+        youtubeUrl: 'https://youtu.be/YXivnx7n22w?si=E11Z8GHuqnY5HI9N',
+        description: 'Tari Gantar adalah tarian suku Dayak yang menggambarkan kegiatan menanam padi. Penari memegang tongkat dan lesung kecil yang dibunyikan.',
+        facts: 'Tari ini merupakan ungkapan rasa syukur kepada Dewi Padi atas hasil panen yang melimpah.'
+      }
+    ];
+
+    // Quiz questions
+    const quizQuestions = [
+      {
+        question: 'Tari Saman berasal dari daerah mana?',
+        options: ['Bali', 'Aceh', 'Jawa Barat', 'Sumatera Barat'],
+        correct: 1
+      },
+      {
+        question: 'Unsur utama dalam seni tari yang berkaitan dengan gerakan tubuh disebut...',
+        options: ['Wirama', 'Wirasa', 'Wiraga', 'Wirupa'],
+        correct: 2
+      },
+      {
+        question: 'Tari yang dibawakan oleh satu orang penari disebut...',
+        options: ['Tari Berpasangan', 'Tari Kelompok', 'Tari Masal', 'Tari Tunggal'],
+        correct: 3
+      },
+      {
+        question: 'Tari Kecak menggunakan iringan musik berupa...',
+        options: ['Gamelan', 'Suara manusia', 'Angklung', 'Kolintang'],
+        correct: 1
+      },
+      {
+        question: 'Properti yang digunakan dalam Tari Piring adalah...',
+        options: ['Kipas', 'Selendang', 'Piring', 'Payung'],
+        correct: 2
+      },
+      {
+        question: 'Tari yang dulu hanya boleh ditarikan di keraton adalah...',
+        options: ['Tari Jaipong', 'Tari Serimpi', 'Tari Poco-poco', 'Tari Tor-Tor'],
+        correct: 1
+      },
+      {
+        question: 'Tari Pendet berasal dari pulau...',
+        options: ['Jawa', 'Sumatera', 'Bali', 'Kalimantan'],
+        correct: 2
+      },
+      {
+        question: 'Wirama dalam seni tari berkaitan dengan...',
+        options: ['Gerakan', 'Irama/musik', 'Ekspresi', 'Kostum'],
+        correct: 1
+      },
+      {
+        question: 'Tari Reog Ponorogo menggunakan topeng berbentuk kepala...',
+        options: ['Harimau', 'Naga', 'Singa dengan bulu merak', 'Garuda'],
+        correct: 2
+      },
+      {
+        question: 'Fungsi tari sebagai sarana untuk menyambut tamu termasuk dalam fungsi...',
+        options: ['Upacara', 'Hiburan', 'Pendidikan', 'Komunikasi'],
+        correct: 0
+      }
+    ];
+
+    // Matching game data - 10 Pairs
+    const matchingPairs = [
+      { dance: 'Tari Saman', region: 'Aceh' },
+      { dance: 'Tari Pendet', region: 'Bali' },
+      { dance: 'Tari Jaipong', region: 'Jawa Barat' },
+      { dance: 'Tari Tor-Tor', region: 'Sumatera Utara' },
+      { dance: 'Tari Piring', region: 'Sumatera Barat' },
+      { dance: 'Tari Reog', region: 'Jawa Timur' },
+      { dance: 'Tari Kecak', region: 'Bali' },
+      { dance: 'Tari Musyoh', region: 'Papua' },
+      { dance: 'Tari Pakarena', region: 'Sulawesi Selatan' },
+      { dance: 'Tari Mandau', region: 'Kalimantan Tengah' }
+    ];
+
+    // Game state
+    let currentQuestion = 0;
+    let quizScore = 0;
+    let selectedAnswer = null;
+    let matchScore = 0;
+    let selectedDance = null;
+    let selectedRegion = null;
+    let matchedPairs = [];
+    let currentLearnTab = 'pengertian';
+    let lastGame = 'quiz';
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+          document.getElementById('welcome-text').textContent = config.welcome_text || defaultConfig.welcome_text;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => window.elementSdk.setConfig({ accent_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['main_title', config.main_title || defaultConfig.main_title],
+          ['welcome_text', config.welcome_text || defaultConfig.welcome_text]
+        ])
+      });
+    }
+
+    // Navigation functions
+    function showSection(section) {
+      ['home', 'learn', 'examples', 'game'].forEach(s => {
+        document.getElementById(`${s}-section`).classList.add('hidden');
+        document.querySelector(`[data-section="${s}"]`)?.classList.remove('active');
+      });
+      document.getElementById(`${section}-section`).classList.remove('hidden');
+      document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
+      
+      if (section === 'learn') {
+        showLearnTab(currentLearnTab);
+      }
+      if (section === 'examples') {
+        renderDanceGrid();
+      }
+    }
+
+    function showLearnTab(tab) {
+      currentLearnTab = tab;
+      document.querySelectorAll('.learn-tab').forEach(t => {
+        t.classList.remove('bg-pink-500/30', 'border-pink-500');
+      });
+      document.querySelector(`[data-tab="${tab}"]`)?.classList.add('bg-pink-500/30', 'border-pink-500');
+      
+      const content = learnContent[tab];
+      document.getElementById('learn-content').innerHTML = `
+        <h3 class="font-display text-2xl font-bold mb-4">${content.title}</h3>
+        ${content.content}
+      `;
+    }
+
+    // Dance examples functions
+    function renderDanceGrid() {
+      const grid = document.getElementById('dance-grid');
+      grid.innerHTML = dances.map((dance, index) => `
+        <div onclick="showDanceDetail(${index})" class="dance-card group relative h-64 rounded-2xl cursor-pointer shadow-lg transition-all" style="animation: slideIn 0.5s ease-out ${index * 0.1}s forwards; opacity: 0;">
+          <img src="${dance.imageUrl}" class="w-full h-full object-cover rounded-2xl" alt="${dance.name}">
+          <!-- Overlay and Blurry Text Background -->
+          <div class="absolute bottom-0 left-0 right-0 p-4 rounded-b-2xl">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-md rounded-b-2xl"></div>
+            <div class="relative z-10">
+                <h3 class="text-xl font-bold text-white drop-shadow-lg">${dance.name}</h3>
+                <p class="text-pink-300 text-sm font-medium drop-shadow-md">${dance.origin}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showDanceDetail(index) {
+      const dance = dances[index];
+      document.getElementById('modal-image').src = dance.imageUrl;
+      document.getElementById('modal-title').textContent = dance.name;
+      document.getElementById('modal-origin').textContent = `📍 ${dance.origin}`;
+      document.getElementById('modal-description').textContent = dance.description;
+      document.getElementById('modal-facts').textContent = dance.facts;
+      
+      // Set YouTube link
+      document.getElementById('modal-youtube-link').href = dance.youtubeUrl;
+      
+      document.getElementById('dance-modal').classList.remove('hidden');
+    }
+
+    function closeDanceModal() {
+      document.getElementById('dance-modal').classList.add('hidden');
+    }
+
+    // Quiz functions
+    function startQuiz() {
+      lastGame = 'quiz';
+      currentQuestion = 0;
+      quizScore = 0;
+      selectedAnswer = null;
+      document.getElementById('game-select').classList.add('hidden');
+      document.getElementById('matching-game').classList.add('hidden');
+      document.getElementById('game-result').classList.add('hidden');
+      document.getElementById('quiz-game').classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = quizQuestions[currentQuestion];
+      document.getElementById('quiz-current').textContent = currentQuestion + 1;
+      document.getElementById('quiz-score').textContent = quizScore;
+      document.getElementById('quiz-progress').style.width = `${(currentQuestion + 1) * 10}%`;
+      document.getElementById('quiz-question').textContent = q.question;
+      document.getElementById('quiz-next').classList.add('hidden');
+      selectedAnswer = null;
+      
+      document.getElementById('quiz-options').innerHTML = q.options.map((opt, i) => `
+        <button onclick="selectAnswer(${i})" class="quiz-option w-full text-left p-4 rounded-xl border border-white/20 hover:border-pink-500 transition-all">
+          ${opt}
+        </button>
+      `).join('');
+    }
+
+    function selectAnswer(index) {
+      if (selectedAnswer !== null) return;
+      selectedAnswer = index;
+      
+      const q = quizQuestions[currentQuestion];
+      const options = document.querySelectorAll('.quiz-option');
+      
+      options.forEach((opt, i) => {
+        opt.classList.remove('hover:border-pink-500');
+        if (i === q.correct) {
+          opt.classList.add('correct');
+        } else if (i === index && i !== q.correct) {
+          opt.classList.add('wrong');
+        }
+      });
+      
+      if (index === q.correct) {
+        quizScore++;
+        document.getElementById('quiz-score').textContent = quizScore;
+      }
+      
+      document.getElementById('quiz-next').classList.remove('hidden');
+      document.getElementById('quiz-next').textContent = currentQuestion < 9 ? 'Lanjut →' : 'Lihat Hasil';
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < 9) {
+        currentQuestion++;
+        showQuestion();
+      } else {
+        showQuizResult();
+      }
+    }
+
+    function showQuizResult() {
+      document.getElementById('quiz-game').classList.add('hidden');
+      document.getElementById('game-result').classList.remove('hidden');
+      
+      let emoji, title, message;
+      if (quizScore >= 9) {
+        emoji = '🏆'; title = 'Luar Biasa!'; message = 'Kamu ahli seni tari sejati!';
+      } else if (quizScore >= 7) {
+        emoji = '🌟'; title = 'Hebat!'; message = 'Pengetahuanmu sangat baik!';
+      } else if (quizScore >= 5) {
+        emoji = '👍'; title = 'Bagus!'; message = 'Terus belajar ya!';
+      } else {
+        emoji = '📚'; title = 'Semangat!'; message = 'Yuk pelajari materi lagi!';
+      }
+      
+      document.getElementById('result-emoji').textContent = emoji;
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-message').textContent = message;
+      document.getElementById('final-score').textContent = `${quizScore}/10`;
+      document.getElementById('retry-btn').onclick = startQuiz;
+    }
+
+    // Matching game functions
+    function startMatching() {
+      lastGame = 'matching';
+      matchScore = 0;
+      selectedDance = null;
+      selectedRegion = null;
+      matchedPairs = [];
+      
+      document.getElementById('game-select').classList.add('hidden');
+      document.getElementById('quiz-game').classList.add('hidden');
+      document.getElementById('game-result').classList.add('hidden');
+      document.getElementById('matching-game').classList.remove('hidden');
+      
+      renderMatchingGame();
+    }
+
+    function renderMatchingGame() {
+      const shuffledDances = [...matchingPairs].sort(() => Math.random() - 0.5);
+      const shuffledRegions = [...matchingPairs].sort(() => Math.random() - 0.5);
+      
+      document.getElementById('match-dances').innerHTML = shuffledDances.map((pair, i) => `
+        <div onclick="selectMatchDance(${i}, '${pair.dance}')" 
+             class="matching-item p-4 rounded-xl border border-white/20 text-center ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
+             data-dance="${pair.dance}">
+          ${pair.dance}
+        </div>
+      `).join('');
+      
+      document.getElementById('match-regions').innerHTML = shuffledRegions.map((pair, i) => `
+        <div onclick="selectMatchRegion(${i}, '${pair.region}')" 
+             class="matching-item p-4 rounded-xl border border-white/20 text-center ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
+             data-region="${pair.region}">
+          ${pair.region}
+        </div>
+      `).join('');
+      
+      document.getElementById('match-score').textContent = matchScore;
+    }
+
+    function selectMatchDance(index, dance) {
+      if (matchedPairs.some(p => p === dance)) return;
+      
+      document.querySelectorAll('#match-dances .matching-item').forEach(el => {
+        if (!el.classList.contains('matched')) {
+          el.classList.remove('selected');
+        }
+      });
+      
+      const el = document.querySelector(`[data-dance="${dance}"]`);
+      el.classList.add('selected');
+      selectedDance = dance;
+      
+      checkMatch();
+    }
+
+    function selectMatchRegion(index, region) {
+      const matches = matchingPairs.filter(p => p.region === region).map(p => p.dance);
+      const isAlreadyMatched = matches.every(d => matchedPairs.includes(d));
+      
+      if (isAlreadyMatched && matches.length > 0) return;
+      
+      document.querySelectorAll('#match-regions .matching-item').forEach(el => {
+        if (!el.classList.contains('matched')) {
+          el.classList.remove('selected');
+        }
+      });
+      
+      const el = document.querySelectorAll(`[data-region="${region}"]`);
+      el.forEach(item => {
+          if (!item.classList.contains('matched')) item.classList.add('selected');
+      });
+      selectedRegion = region;
+      
+      checkMatch();
+    }
+
+    function checkMatch() {
+      if (selectedDance && selectedRegion) {
+        const correctPair = matchingPairs.find(p => p.dance === selectedDance);
+        
+        if (correctPair && correctPair.region === selectedRegion) {
+          matchScore++;
+          matchedPairs.push(selectedDance);
+          
+          document.querySelector(`[data-dance="${selectedDance}"]`).classList.add('matched');
+          document.querySelector(`[data-dance="${selectedDance}"]`).classList.remove('selected');
+          
+          const regionElements = document.querySelectorAll(`[data-region="${selectedRegion}"]`);
+          regionElements.forEach(el => {
+              if (el.classList.contains('selected')) {
+                  el.classList.add('matched');
+                  el.classList.remove('selected');
+              }
+          });
+          
+          document.getElementById('match-score').textContent = matchScore;
+          
+          if (matchScore === 10) {
+            setTimeout(showMatchingResult, 500);
+          }
+        } else {
+          setTimeout(() => {
+            document.querySelectorAll('.matching-item.selected').forEach(el => {
+              el.classList.remove('selected');
+            });
+          }, 300);
+        }
+        
+        selectedDance = null;
+        selectedRegion = null;
+      }
+    }
+
+    function showMatchingResult() {
+      document.getElementById('matching-game').classList.add('hidden');
+      document.getElementById('game-result').classList.remove('hidden');
+      
+      document.getElementById('result-emoji').textContent = '🎊';
+      document.getElementById('result-title').textContent = 'Selamat!';
+      document.getElementById('result-message').textContent = 'Kamu berhasil mencocokkan semua tarian!';
+      document.getElementById('final-score').textContent = '10/10';
+      document.getElementById('retry-btn').onclick = startMatching;
+    }
+
+    function resetMatching() {
+      startMatching();
+    }
+
+    function backToGameSelect() {
+      document.getElementById('quiz-game').classList.add('hidden');
+      document.getElementById('matching-game').classList.add('hidden');
+      document.getElementById('game-result').classList.add('hidden');
+      document.getElementById('game-select').classList.remove('hidden');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('home');
+    });
+    
+    // Close modal on outside click
+    document.getElementById('dance-modal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'dance-modal') {
+        closeDanceModal();
+      }
+    });
+  </script>
+ </body>
+</html> 
