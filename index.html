@@ -157,17 +157,17 @@
       <div class="grid md:grid-cols-3 gap-6 mt-8">
        <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.1s">
         <span class="text-4xl mb-4 block">📚</span>
-        <h3 class="text-lg font-semibold mb-2">Materi Lengkap</h3>
+        <h3 class="text-lg font-semibold mb-2 text-white">Materi Lengkap</h3>
         <p class="text-gray-400 text-sm">Pelajari pengertian, jenis, dan unsur-unsur seni tari</p>
        </div>
        <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.2s">
         <span class="text-4xl mb-4 block">🗺️</span>
-        <h3 class="text-lg font-semibold mb-2">Tarian Nusantara</h3>
+        <h3 class="text-lg font-semibold mb-2 text-white">Tarian Nusantara</h3>
         <p class="text-gray-400 text-sm">Kenali berbagai tarian tradisional dari seluruh Indonesia</p>
        </div>
        <div class="card-dance rounded-2xl p-6 slide-in" style="animation-delay: 0.3s">
         <span class="text-4xl mb-4 block">🏆</span>
-        <h3 class="text-lg font-semibold mb-2">Game Edukatif</h3>
+        <h3 class="text-lg font-semibold mb-2 text-white">Game Edukatif</h3>
         <p class="text-gray-400 text-sm">Uji pengetahuanmu dengan kuis dan game menarik</p>
        </div>
       </div>
@@ -193,7 +193,7 @@
       </div>
      </div><!-- Dance Detail Modal -->
      <div id="dance-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div class="card-dance rounded-3xl p-8 max-w-3xl w-full max-h-[90%] overflow-auto">
+      <div class="card-dance rounded-3xl p-8 max-w-3xl w-full max-h-[90%] overflow-auto text-white">
        <div class="flex justify-between items-start mb-6">
         <div id="modal-image-container" class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-pink-500">
             <img id="modal-image" src="" class="w-full h-full object-cover" alt="Dance Image">
@@ -205,7 +205,7 @@
        <div class="mb-6"><a id="modal-youtube-link" href="" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block px-6 py-3 rounded-xl text-white font-semibold hover:shadow-lg transition-all"> ▶️ Tonton di YouTube </a>
        </div>
        <p id="modal-description" class="text-gray-300 leading-relaxed mb-6"></p>
-       <div class="bg-white/5 rounded-xl p-4">
+       <div class="bg-white/5 rounded-xl p-4 border border-white/10">
         <h4 class="font-semibold mb-2">📌 Fakta Menarik:</h4>
         <p id="modal-facts" class="text-gray-400 text-sm"></p>
        </div>
@@ -218,7 +218,7 @@
       <div id="game-select" class="grid md:grid-cols-2 gap-6">
        <div onclick="startQuiz()" class="dance-card card-dance rounded-3xl p-8 cursor-pointer text-center">
         <span class="text-6xl mb-4 block">❓</span>
-        <h3 class="text-2xl font-bold mb-2">Kuis Tari</h3>
+        <h3 class="text-2xl font-bold mb-2 text-white">Kuis Tari</h3>
         <p class="text-gray-400">Uji pengetahuanmu tentang seni tari dengan 10 pertanyaan seru!</p>
         <div class="mt-4 btn-primary inline-block px-6 py-2 rounded-full text-sm font-medium">
          Mulai Kuis
@@ -226,7 +226,7 @@
        </div>
        <div onclick="startMatching()" class="dance-card card-dance rounded-3xl p-8 cursor-pointer text-center">
         <span class="text-6xl mb-4 block">🔗</span>
-        <h3 class="text-2xl font-bold mb-2">Cocokkan Tarian</h3>
+        <h3 class="text-2xl font-bold mb-2 text-white">Cocokkan Tarian</h3>
         <p class="text-gray-400">Cocokkan nama tarian dengan daerah asalnya!</p>
         <div class="mt-4 btn-primary inline-block px-6 py-2 rounded-full text-sm font-medium">
          Mulai Game
@@ -244,19 +244,22 @@
           <div id="quiz-progress" class="progress-bar h-full bg-gradient-to-r from-pink-500 to-red-500" style="width: 10%"></div>
          </div>
         </div><!-- Question -->
-        <h3 id="quiz-question" class="text-xl font-semibold mb-6"></h3><!-- Options -->
+        <div id="quiz-image-container" class="hidden mb-6 w-full max-w-lg mx-auto rounded-2xl overflow-hidden border-2 border-white/20">
+            <img id="quiz-question-image" src="" class="w-full h-64 object-cover" alt="Soal Gambar">
+        </div>
+        <h3 id="quiz-question" class="text-xl font-semibold mb-6 text-white text-center"></h3><!-- Options -->
         <div id="quiz-options" class="space-y-3">
          <!-- Options will be injected here -->
         </div><!-- Navigation -->
         <div class="mt-8 flex justify-between">
-         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> ← Kembali </button> <button id="quiz-next" onclick="nextQuestion()" class="hidden btn-primary px-6 py-2 rounded-full font-medium"> Lanjut → </button>
+         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white"> ← Kembali </button> <button id="quiz-next" onclick="nextQuestion()" class="hidden btn-primary px-6 py-2 rounded-full font-medium"> Lanjut → </button>
         </div>
        </div>
       </div><!-- Matching Game -->
       <div id="matching-game" class="hidden">
        <div class="card-dance rounded-3xl p-8">
         <div class="flex justify-between items-center mb-6">
-         <h3 class="text-xl font-semibold">Cocokkan Tarian dengan Daerahnya!</h3><span class="text-pink-400">Skor: <span id="match-score">0</span>/10</span>
+         <h3 class="text-xl font-semibold text-white">Cocokkan Tarian dengan Daerahnya!</h3><span class="text-pink-400">Skor: <span id="match-score">0</span>/10</span>
         </div>
         <div class="grid md:grid-cols-2 gap-8">
          <!-- Dances Column -->
@@ -274,18 +277,18 @@
          </div>
         </div>
         <div class="mt-8 flex justify-between">
-         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> ← Kembali </button> <button onclick="resetMatching()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all"> 🔄 Ulangi </button>
+         <button onclick="backToGameSelect()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white"> ← Kembali </button> <button onclick="resetMatching()" class="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white"> 🔄 Ulangi </button>
         </div>
        </div>
       </div><!-- Game Result -->
       <div id="game-result" class="hidden">
        <div class="card-dance rounded-3xl p-8 text-center">
         <span id="result-emoji" class="text-8xl mb-4 block"></span>
-        <h3 id="result-title" class="font-display text-3xl font-bold mb-2"></h3>
+        <h3 id="result-title" class="font-display text-3xl font-bold mb-2 text-white"></h3>
         <p id="result-message" class="text-gray-300 mb-4"></p>
         <p class="text-2xl font-bold text-pink-400 mb-8">Skor: <span id="final-score"></span></p>
         <div class="flex justify-center gap-4">
-         <button onclick="backToGameSelect()" class="px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all"> Pilih Game Lain </button> <button id="retry-btn" class="btn-primary px-6 py-3 rounded-full font-medium"> Main Lagi </button>
+         <button onclick="backToGameSelect()" class="px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white"> Pilih Game Lain </button> <button id="retry-btn" class="btn-primary px-6 py-3 rounded-full font-medium"> Main Lagi </button>
         </div>
        </div>
       </div>
@@ -313,8 +316,8 @@
       pengertian: {
         title: '🎭 Pengertian Seni Tari',
         content: `
-          <p class="mb-4">Seni tari adalah ungkapan ekspresi jiwa manusia yang diwujudkan melalui gerak-gerak tubuh yang indah dan ritmis. Tari merupakan salah satu cabang seni yang menggunakan tubuh sebagai media utama untuk menyampaikan pesan, cerita, atau emosi.</p>
-          <div class="bg-white/5 rounded-xl p-4 mb-4">
+          <p class="mb-4 text-gray-200">Seni tari adalah ungkapan ekspresi jiwa manusia yang diwujudkan melalui gerak-gerak tubuh yang indah dan ritmis. Tari merupakan salah satu cabang seni yang menggunakan tubuh sebagai media utama untuk menyampaikan pesan, cerita, atau emosi.</p>
+          <div class="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
             <h4 class="font-semibold text-pink-400 mb-2">Menurut Para Ahli:</h4>
             <ul class="space-y-2 text-gray-300">
               <li>• <strong>Soedarsono:</strong> Tari adalah ekspresi jiwa manusia yang diungkapkan dengan gerak-gerak ritmis yang indah.</li>
@@ -328,8 +331,8 @@
       jenis: {
         title: '📂 Jenis-Jenis Tari',
         content: `
-          <div class="space-y-4">
-            <div class="bg-white/5 rounded-xl p-4">
+          <div class="space-y-4 text-white">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <h4 class="font-semibold text-pink-400 mb-2">🎪 Berdasarkan Pola Garapan:</h4>
               <ul class="space-y-1 text-gray-300">
                 <li>• <strong>Tari Tradisional:</strong> Tari yang diwariskan turun-temurun (Tari Pendet, Tari Saman)</li>
@@ -337,15 +340,33 @@
                 <li>• <strong>Tari Kontemporer:</strong> Tari yang mengutamakan kebebasan ekspresi</li>
               </ul>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <h4 class="font-semibold text-pink-400 mb-2">👥 Berdasarkan Jumlah Penari:</h4>
-              <ul class="space-y-1 text-gray-300">
-                <li>• <strong>Tari Tunggal:</strong> Dibawakan oleh satu orang (Tari Golek)</li>
-                <li>• <strong>Tari Berpasangan:</strong> Dibawakan oleh dua orang (Tari Serampang Dua Belas)</li>
-                <li>• <strong>Tari Kelompok:</strong> Dibawakan oleh banyak orang (Tari Saman, Tari Kecak)</li>
+              <ul class="space-y-4 text-gray-300">
+                <li class="flex flex-col gap-2">
+                  <span>• <strong>Tari Tunggal:</strong> Dibawakan oleh satu orang (Tari Golek)</span>
+                  <div class="relative w-full max-w-sm rounded-xl overflow-hidden border border-white/20 group">
+                    <img src="https://res.cloudinary.com/dwvki593f/image/upload/v1776048626/a732e285-1787-4476-9074-6d78a5022193_ts6fng.jpg" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" alt="Tari Tunggal">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-md p-2 text-xs text-center italic font-medium text-white">Contoh Tari Tunggal</div>
+                  </div>
+                </li>
+                <li class="flex flex-col gap-2">
+                  <span>• <strong>Tari Berpasangan:</strong> Dibawakan oleh dua orang (Tari Serampang Dua Belas)</span>
+                  <div class="relative w-full max-w-sm rounded-xl overflow-hidden border border-white/20 group">
+                    <img src="https://res.cloudinary.com/dwvki593f/image/upload/v1776048624/9256917b-9f07-45a7-b15f-cbda33c99e71_szyaqr.jpg" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" alt="Tari Berpasangan">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-md p-2 text-xs text-center italic font-medium text-white">Contoh Tari Berpasangan</div>
+                  </div>
+                </li>
+                <li class="flex flex-col gap-2">
+                  <span>• <strong>Tari Kelompok:</strong> Dibawakan oleh banyak orang (Tari Saman, Tari Kecak)</span>
+                  <div class="relative w-full max-w-sm rounded-xl overflow-hidden border border-white/20 group">
+                    <img src="https://res.cloudinary.com/dwvki593f/image/upload/v1776048623/01df92f9-9248-43d3-b319-30473417acc5_wfxomk.jpg" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" alt="Tari Kelompok">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-md p-2 text-xs text-center italic font-medium text-white">Contoh Tari Kelompok</div>
+                  </div>
+                </li>
               </ul>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <h4 class="font-semibold text-pink-400 mb-2">🎭 Berdasarkan Fungsi:</h4>
               <ul class="space-y-1 text-gray-300">
                 <li>• <strong>Tari Upacara:</strong> Untuk ritual keagamaan/adat</li>
@@ -359,33 +380,33 @@
       unsur: {
         title: '🧩 Unsur-Unsur Tari',
         content: `
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="bg-white/5 rounded-xl p-4">
+          <div class="grid md:grid-cols-2 gap-4 text-white">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">🏃</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Gerak (Wiraga)</h4>
               <p class="text-gray-300 text-sm">Unsur utama tari yang meliputi seluruh gerakan tubuh penari</p>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">🎵</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Irama (Wirama)</h4>
               <p class="text-gray-300 text-sm">Musik pengiring yang menentukan tempo dan ritme tarian</p>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">😊</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Ekspresi (Wirasa)</h4>
               <p class="text-gray-300 text-sm">Penjiwaan dan ekspresi wajah penari saat menari</p>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">👗</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Busana</h4>
               <p class="text-gray-300 text-sm">Kostum dan aksesoris yang dikenakan penari</p>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">💄</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Rias</h4>
               <p class="text-gray-300 text-sm">Riasan wajah untuk memperkuat karakter</p>
             </div>
-            <div class="bg-white/5 rounded-xl p-4">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
               <span class="text-3xl">🎪</span>
               <h4 class="font-semibold text-pink-400 mt-2 mb-1">Tata Panggung</h4>
               <p class="text-gray-300 text-sm">Pengaturan tempat pertunjukan tari</p>
@@ -396,36 +417,36 @@
       fungsi: {
         title: '🎯 Fungsi Seni Tari',
         content: `
-          <div class="space-y-4">
-            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+          <div class="space-y-4 text-white">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4 border border-white/10">
               <span class="text-3xl">🙏</span>
               <div>
                 <h4 class="font-semibold text-pink-400 mb-1">Sarana Upacara</h4>
                 <p class="text-gray-300 text-sm">Digunakan dalam ritual keagamaan dan adat istiadat, seperti Tari Pendet di Bali untuk menyambut tamu atau persembahan kepada dewa.</p>
               </div>
             </div>
-            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4 border border-white/10">
               <span class="text-3xl">🎉</span>
               <div>
                 <h4 class="font-semibold text-pink-400 mb-1">Sarana Hiburan</h4>
                 <p class="text-gray-300 text-sm">Memberikan hiburan dan kesenangan bagi penonton maupun penari, seperti Tari Jaipong yang menghibur.</p>
               </div>
             </div>
-            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4 border border-white/10">
               <span class="text-3xl">🎭</span>
               <div>
                 <h4 class="font-semibold text-pink-400 mb-1">Sarana Pertunjukan</h4>
                 <p class="text-gray-300 text-sm">Ditampilkan sebagai karya seni yang memiliki nilai estetika tinggi di panggung profesional.</p>
               </div>
             </div>
-            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4 border border-white/10">
               <span class="text-3xl">📚</span>
               <div>
                 <h4 class="font-semibold text-pink-400 mb-1">Media Pendidikan</h4>
                 <p class="text-gray-300 text-sm">Mengajarkan nilai-nilai budaya, sejarah, dan moral kepada generasi muda.</p>
               </div>
             </div>
-            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4">
+            <div class="bg-white/5 rounded-xl p-4 flex items-start gap-4 border border-white/10">
               <span class="text-3xl">💬</span>
               <div>
                 <h4 class="font-semibold text-pink-400 mb-1">Media Komunikasi</h4>
@@ -491,7 +512,7 @@
         name: 'Tari Reog Ponorogo',
         origin: 'Jawa Timur',
         imageUrl: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458079/tari_reog_ponorogo_vhfucb.jpg',
-        youtubeUrl: 'https://youtu.be/ME1i_9uSzZQ?si=SF92L8tpWQk2k0qL',
+        youtubeUrl: 'https://youtu.be/ME1i_9uSzZQ?si=SF92L8tpWQk2k0L',
         description: 'Tari Reog adalah kesenian spektakuler dari Ponorogo yang menampilkan topeng besar berbentuk kepala singa dengan hiasan bulu merak yang berat.',
         facts: 'Topeng reog bisa berbobot hingga 50 kg dan ditopang menggunakan gigi penari! Reog sudah dipatenkan sebagai warisan budaya Indonesia.'
       },
@@ -513,10 +534,11 @@
       }
     ];
 
-    // Quiz questions
+    // Quiz questions with all the provided images
     const quizQuestions = [
       {
-        question: 'Tari Saman berasal dari daerah mana?',
+        question: 'Tari Saman (seperti gambar di atas) berasal dari daerah mana?',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458121/tari_saman_lfjx6s.jpg',
         options: ['Bali', 'Aceh', 'Jawa Barat', 'Sumatera Barat'],
         correct: 1
       },
@@ -526,27 +548,32 @@
         correct: 2
       },
       {
-        question: 'Tari yang dibawakan oleh satu orang penari disebut...',
+        question: 'Tari (seperti gambar di atas) yang dibawakan oleh satu orang penari disebut...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1776048626/a732e285-1787-4476-9074-6d78a5022193_ts6fng.jpg',
         options: ['Tari Berpasangan', 'Tari Kelompok', 'Tari Masal', 'Tari Tunggal'],
         correct: 3
       },
       {
-        question: 'Tari Kecak menggunakan iringan musik berupa...',
+        question: 'Tari Kecak (seperti gambar di atas) menggunakan iringan musik berupa...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458104/tari_kecak_bqbn97.jpg',
         options: ['Gamelan', 'Suara manusia', 'Angklung', 'Kolintang'],
         correct: 1
       },
       {
-        question: 'Properti yang digunakan dalam Tari Piring adalah...',
+        question: 'Properti yang digunakan dalam tari pada gambar di atas adalah...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458085/tari_piring_kb1wku.jpg',
         options: ['Kipas', 'Selendang', 'Piring', 'Payung'],
         correct: 2
       },
       {
-        question: 'Tari yang dulu hanya boleh ditarikan di keraton adalah...',
+        question: 'Tari klasik (seperti gambar di atas) yang dulu hanya boleh ditarikan di keraton adalah...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458071/tari_serimpi_nuxpfn.jpg',
         options: ['Tari Jaipong', 'Tari Serimpi', 'Tari Poco-poco', 'Tari Tor-Tor'],
         correct: 1
       },
       {
-        question: 'Tari Pendet berasal dari pulau...',
+        question: 'Tari (seperti pada gambar) berasal dari pulau...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458112/tari_pendet_rdlncm.jpg',
         options: ['Jawa', 'Sumatera', 'Bali', 'Kalimantan'],
         correct: 2
       },
@@ -556,7 +583,8 @@
         correct: 1
       },
       {
-        question: 'Tari Reog Ponorogo menggunakan topeng berbentuk kepala...',
+        question: 'Tari pada gambar di atas menggunakan topeng berbentuk kepala...',
+        image: 'https://res.cloudinary.com/dwvki593f/image/upload/v1775458079/tari_reog_ponorogo_vhfucb.jpg',
         options: ['Harimau', 'Naga', 'Singa dengan bulu merak', 'Garuda'],
         correct: 2
       },
@@ -567,7 +595,7 @@
       }
     ];
 
-    // Matching game data - 10 Pairs
+    // Matching game data - 10 Pairs preserved
     const matchingPairs = [
       { dance: 'Tari Saman', region: 'Aceh' },
       { dance: 'Tari Pendet', region: 'Bali' },
@@ -660,7 +688,7 @@
       
       const content = learnContent[tab];
       document.getElementById('learn-content').innerHTML = `
-        <h3 class="font-display text-2xl font-bold mb-4">${content.title}</h3>
+        <h3 class="font-display text-2xl font-bold mb-4 text-white">${content.title}</h3>
         ${content.content}
       `;
     }
@@ -672,8 +700,8 @@
         <div onclick="showDanceDetail(${index})" class="dance-card group relative h-64 rounded-2xl cursor-pointer shadow-lg transition-all" style="animation: slideIn 0.5s ease-out ${index * 0.1}s forwards; opacity: 0;">
           <img src="${dance.imageUrl}" class="w-full h-full object-cover rounded-2xl" alt="${dance.name}">
           <!-- Overlay and Blurry Text Background -->
-          <div class="absolute bottom-0 left-0 right-0 p-4 rounded-b-2xl">
-            <div class="absolute inset-0 bg-black/40 backdrop-blur-md rounded-b-2xl"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 rounded-b-2xl overflow-hidden">
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
             <div class="relative z-10">
                 <h3 class="text-xl font-bold text-white drop-shadow-lg">${dance.name}</h3>
                 <p class="text-pink-300 text-sm font-medium drop-shadow-md">${dance.origin}</p>
@@ -721,10 +749,21 @@
       document.getElementById('quiz-progress').style.width = `${(currentQuestion + 1) * 10}%`;
       document.getElementById('quiz-question').textContent = q.question;
       document.getElementById('quiz-next').classList.add('hidden');
+      
+      const imgContainer = document.getElementById('quiz-image-container');
+      const qImage = document.getElementById('quiz-question-image');
+      
+      if (q.image) {
+        qImage.src = q.image;
+        imgContainer.classList.remove('hidden');
+      } else {
+        imgContainer.classList.add('hidden');
+      }
+      
       selectedAnswer = null;
       
       document.getElementById('quiz-options').innerHTML = q.options.map((opt, i) => `
-        <button onclick="selectAnswer(${i})" class="quiz-option w-full text-left p-4 rounded-xl border border-white/20 hover:border-pink-500 transition-all">
+        <button onclick="selectAnswer(${i})" class="quiz-option w-full text-left p-4 rounded-xl border border-white/20 hover:border-pink-500 transition-all text-white">
           ${opt}
         </button>
       `).join('');
@@ -808,7 +847,7 @@
       
       document.getElementById('match-dances').innerHTML = shuffledDances.map((pair, i) => `
         <div onclick="selectMatchDance(${i}, '${pair.dance}')" 
-             class="matching-item p-4 rounded-xl border border-white/20 text-center ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
+             class="matching-item p-4 rounded-xl border border-white/20 text-center text-white ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
              data-dance="${pair.dance}">
           ${pair.dance}
         </div>
@@ -816,7 +855,7 @@
       
       document.getElementById('match-regions').innerHTML = shuffledRegions.map((pair, i) => `
         <div onclick="selectMatchRegion(${i}, '${pair.region}')" 
-             class="matching-item p-4 rounded-xl border border-white/20 text-center ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
+             class="matching-item p-4 rounded-xl border border-white/20 text-center text-white ${matchedPairs.includes(pair.dance) ? 'matched' : ''}"
              data-region="${pair.region}">
           ${pair.region}
         </div>
@@ -934,4 +973,4 @@
     });
   </script>
  </body>
-</html> 
+</html>
